@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<webApiHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>d8084d66-dd50-481c-9e9c-0e1e47e75905</versionUuid>
+    <webApi a:uuid="7cdd09ba-7874-4e22-a915-3946292aab3e" name="web_API_Submit_Form_Nicholas">
+        <a:description></a:description>
+        <a:expression>with(
+  local!value: cast(
+    'type!{urn:com:appian:types:EC_Application}EC_Application',
+    #"SYSTEM_SYSRULES_fromJson"(
+      http!request.body
+    )
+  )/*
+  a!httpResponse(
+    statusCode: 200,
+      headers: {
+        a!httpHeader(name: "Content-Type", value: "application/json")
+      },
+    body: local!value
+  )*/
+  ,
+  #"SYSTEM_SYSRULES_startProcess"(
+    processModel: #"_a-0000e008-511e-8000-5130-010000010000_153797",
+    processParameters: #"SYSTEM_SYSRULES_fromJson"(
+      http!request.body
+    ),
+    onSuccess: #"SYSTEM_SYSRULES_httpResponse"(
+      statusCode: 200,
+      headers: {
+        #"SYSTEM_SYSRULES_httpHeader"(
+          name: "Content-Type",
+          value: "application/json"
+        )
+      },
+      body: #"SYSTEM_SYSRULES_toJson_v1"(fv!processInfo)
+    ),
+    onError: #"SYSTEM_SYSRULES_httpResponse"(
+      statusCode: 500,
+      headers: {
+        #"SYSTEM_SYSRULES_httpHeader"(
+          name: "Content-Type",
+          value: "application/json"
+        )
+      },
+      body: #"SYSTEM_SYSRULES_toJson_v1"(
+        {
+          error: "There was an error starting the process"
+        }
+      )
+    )
+  )
+)</a:expression>
+        <a:urlAlias>web-api-nicholas</a:urlAlias>
+        <a:httpMethod>POST</a:httpMethod>
+        <a:system>false</a:system>
+    </webApi>
+    <roleMap/>
+    <typedValue>
+        <type>
+            <name>WebApiRequest?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:path/>
+                <a:queryParameters>
+                    <a:name>expenseItem</a:name>
+                    <a:value>food</a:value>
+                </a:queryParameters>
+                <a:headers>
+                    <a:name>Content-Type</a:name>
+                    <a:value>application/json</a:value>
+                </a:headers>
+                <a:body>{
+
+}</a:body>
+            </el>
+        </value>
+    </typedValue>
+    <history>
+        <historyInfo versionUuid="d8084d66-dd50-481c-9e9c-0e1e47e75905"/>
+    </history>
+</webApiHaul>

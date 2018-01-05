@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:com:appian:types:EC_Application"
+  xmlns:tns="urn:com:appian:types:EC_Application" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="EC_Application">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">
+        @Table(name="EC_DS_table1")
+      </xsd:appinfo>
+      <xsd:documentation><![CDATA[Complex data type to store the data used for the Audit History application for News Usage.]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="id" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Id @GeneratedValue</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="expenseItem" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="expenseDate" nillable="true" type="xsd:date"/>
+      <xsd:element name="expenseAmount" nillable="true" type="xsd:double"/>
+      <xsd:element name="comment" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=66000)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="action" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="mComment" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=66000)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="sComment" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=66000)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="fComment" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=66000)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="status" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="employeeID" nillable="true" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

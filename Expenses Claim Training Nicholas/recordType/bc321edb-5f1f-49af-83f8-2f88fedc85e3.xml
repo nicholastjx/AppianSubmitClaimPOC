@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<recordTypeHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>ae5d503a-c919-4f34-864f-68dcef89e610</versionUuid>
+    <recordType a:uuid="bc321edb-5f1f-49af-83f8-2f88fedc85e3" name="0_EC_ClaimForm_Nicholas">
+        <a:pluralName>0 Claim Record</a:pluralName>
+        <a:description></a:description>
+        <a:urlStub>SLbGZA</a:urlStub>
+        <a:source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:DataStoreEntity" a:uuid="832e446e-5d7a-41ef-9920-6262bb054ebb@_a-0000dfe5-aeef-8000-5130-010000010000_108867"/>
+        <a:listViewTemplateExpr>#"SYSTEM_SYSRULES_recordGridLayoutColumns"(
+  pageSize: 50,
+  defaultSort: #"SYSTEM_SYSRULES_sortInfo"(
+    field: "expenseItem",
+    ascending: fn!true()
+  ),
+  columns: {
+    #"SYSTEM_SYSRULES_gridLayoutColumn"(
+      label: "Expense Item",
+      field: "expenseItem",
+      component: #"SYSTEM_SYSRULES_recordGrid_linkField"(
+        links: #"SYSTEM_SYSRULES_recordLink"(
+          label: rf!expenseItem,
+          recordType: rp!type,
+          identifier: rp!id
+        )
+      )
+    ),
+    #"SYSTEM_SYSRULES_gridLayoutColumn"(
+      label: "Comment",
+      field: "comment",
+      component: #"SYSTEM_SYSRULES_recordGrid_textField"(
+        displayValue: rf!comment,
+        align: null
+      )
+    ),
+    #"SYSTEM_SYSRULES_gridLayoutColumn"(
+      label: "Action",
+      field: "action",
+      component: #"SYSTEM_SYSRULES_recordGrid_textField"(
+        displayValue: rf!action,
+        align: null
+      )
+    ),
+    #"SYSTEM_SYSRULES_gridLayoutColumn"(
+      label: "Expense Amount",
+      field: "expenseAmount",
+      component: #"SYSTEM_SYSRULES_recordGrid_floatingPointField"(
+        displayValue: rf!expenseAmount,
+        align: "RIGHT"
+      )
+    ),
+    #"SYSTEM_SYSRULES_gridLayoutColumn"(
+      label: "Id",
+      field: "id",
+      component: #"SYSTEM_SYSRULES_recordGrid_integerField"(
+        displayValue: rf!id,
+        align: "RIGHT"
+      )
+    )
+  }
+)</a:listViewTemplateExpr>
+        <a:detailViewCfg>
+            <a:nameExpr>="Summary"</a:nameExpr>
+            <a:uiExpr>= #"SYSTEM_SYSRULES_dashboardLayout_v1"(
+  contents: {
+    #"SYSTEM_SYSRULES_textField"(
+      label: "Expense Item",
+      labelPosition: "ADJACENT",
+      value: rf!expenseItem,
+      readOnly: true
+    ),
+    #"SYSTEM_SYSRULES_textField"(
+      label: "Amount",
+      labelPosition: "ADJACENT",
+      value: rf!expenseAmount,
+      readOnly: true
+    ),
+    #"SYSTEM_SYSRULES_textField"(
+      label: "Purchase Date",
+      labelPosition: "ADJACENT",
+      value: rf!expenseDate,
+      readOnly: true
+    ),
+    #"SYSTEM_SYSRULES_textField"(
+      label: "Comment",
+      labelPosition: "ADJACENT",
+      value: if(
+        isnull(
+          rf!comment
+        ),
+        "N.A",
+        rf!comment
+      ),
+      readOnly: true
+    ),
+    #"SYSTEM_SYSRULES_textField"(
+      label: "Manager's Comment",
+      labelPosition: "ADJACENT",
+      value: if(
+        isnull(
+          rf!mComment
+        ),
+        "N.A",
+        rf!mcomment
+      ),
+      readOnly: true
+    ),
+    /*
+    a!textField(
+      label: "Status",
+      labelPosition: "ADJACENT",
+      value: if(or(rf!action == "reject",rf!action == "approve"),rf!action,"Pending"),
+      readOnly: true
+    ),*/
+     #"SYSTEM_SYSRULES_textField"(
+      label: "Status",
+      labelPosition: "ADJACENT",
+      value: rf!status,
+      readOnly: true
+      )
+   
+  }
+)</a:uiExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:urlStub>summary</a:urlStub>
+            <a:headerExpr></a:headerExpr>
+        </a:detailViewCfg>
+        <a:relatedActionCfg>
+            <a:target xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:ProcessModel" a:uuid="0002dff5-5127-8000-5131-010000010000"/>
+            <a:contextExpr>{
+  recordID: rf!id/* EC_Application */
+ /* employee: null /* EC_Employee_Nicholas */
+}</a:contextExpr>
+            <a:visibilityExpr>=true()</a:visibilityExpr>
+            <a:iconId>f0e7</a:iconId>
+            <a:refId>78078d85-ae7f-4cbc-81f8-861979c4429a</a:refId>
+            <a:staticTitle>true</a:staticTitle>
+            <a:staticDescription>true</a:staticDescription>
+        </a:relatedActionCfg>
+        <a:isSystem>false</a:isSystem>
+        <a:dataSrcExpr></a:dataSrcExpr>
+        <a:facetsListExpr></a:facetsListExpr>
+        <a:titleExpr>"Record status for " &amp; rf!expenseItem </a:titleExpr>
+        <a:defaultFiltersExpr></a:defaultFiltersExpr>
+        <a:layoutType>GRID</a:layoutType>
+        <a:security>16383</a:security>
+        <a:hideLatestNews>false</a:hideLatestNews>
+        <a:isExportable>true</a:isExportable>
+    </recordType>
+    <roleMap/>
+    <history>
+        <historyInfo versionUuid="ae5d503a-c919-4f34-864f-68dcef89e610"/>
+    </history>
+</recordTypeHaul>

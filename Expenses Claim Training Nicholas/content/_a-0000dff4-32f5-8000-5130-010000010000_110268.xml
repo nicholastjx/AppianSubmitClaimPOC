@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e008-511e-8000-5130-010000010000_154658</versionUuid>
+    <queryRule>
+        <name>EC_get_Details_Nicholas</name>
+        <uuid>_a-0000dff4-32f5-8000-5130-010000010000_110268</uuid>
+        <description></description>
+        <folderUuid>_a-0000dfe5-aeef-8000-5130-010000010000_108323</folderUuid>
+        <dataStoreEntityCompositeUuid>832e446e-5d7a-41ef-9920-6262bb054ebb@_a-0000dfe5-aeef-8000-5130-010000010000_108867</dataStoreEntityCompositeUuid>
+        <params/>
+        <filters/>
+        <orderings/>
+    </queryRule>
+    <roleMap public="false">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e008-511e-8000-5130-010000010000_154658"/>
+    </history>
+</contentHaul>

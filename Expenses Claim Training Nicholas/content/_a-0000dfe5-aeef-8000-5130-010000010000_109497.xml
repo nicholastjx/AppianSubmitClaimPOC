@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e008-511e-8000-5130-010000010000_154656</versionUuid>
+    <rule>
+        <name>expenseReportForm_supervisor_Nicholas</name>
+        <uuid>_a-0000dfe5-aeef-8000-5130-010000010000_109497</uuid>
+        <description>Only when value of expense is more than 100 dollars</description>
+        <parentUuid>_a-0000dfe5-aeef-8000-5130-010000010000_108323</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>  load(
+  local!check,
+  with(
+ #"SYSTEM_SYSRULES_formLayout_v1"(
+    label: "Approve Expense Report",
+    instructions: "",
+    contents: {
+      #"SYSTEM_SYSRULES_textField"(
+        label: "Expense Item",
+        labelPosition: "ADJACENT",
+        value: ri!application.expenseItem,
+        saveInto: ri!application.expenseItem,
+        refreshAfter: "UNFOCUS",
+        required: true,
+        readOnly: true,
+        validations: {},
+        align: "LEFT"
+      ),
+      #"SYSTEM_SYSRULES_dateField"(
+        label: "Date",
+        labelPosition: "ADJACENT",
+        value: ri!application.expenseDate,
+        saveInto: ri!application.expenseDate,
+        required: true,
+        readOnly: true,
+        validations: {},
+        align: "LEFT"
+      ),
+      #"SYSTEM_SYSRULES_floatingPointField"(
+        label: "Amount",
+        labelPosition: "ADJACENT",
+        value: ri!application.expenseAmount,
+        saveInto: ri!application.expenseAmount,
+        refreshAfter: "UNFOCUS",
+        required: true(),
+        readOnly: true,
+        validations: {},
+        align: "LEFT"
+      ),
+      #"_a-0000dfe5-aeef-8000-5130-010000010000_108346"(
+        shownWhen: ri!application.expenseAmount &gt; 100,
+        labelPosition: "ADJACENT",
+        readonly:true,
+        required: true,
+        commentValue: ri!application.comment,
+        commentSaveInto: ri!application.comment
+      ),
+         #"SYSTEM_SYSRULES_checkboxField"(
+        labelPosition: "ABOVE",
+        choiceLabels: {"Read Manager's comment"},
+        choiceValues: {true},
+        saveInto: {local!check},
+        validations: {}
+      ),
+      #"_a-0000dfe5-aeef-8000-5130-010000010000_108346"(
+        shownwhen: local!check,
+        labelPosition: "ADJACENT",
+        readonly:true,
+        required: true,
+        commentValue: ri!application.mComment,
+        commentSaveInto: ri!application.mComment,
+        commentLabel: "Manager's comment"
+      )
+       /*rule!enterComments_Nicholas(
+        labelPosition: "ADJACENT",
+        readonly:true,
+        required: true,
+        commentValue: ri!application.sCommentComment,
+        commentSaveInto: ri!application.sComment
+      ),*/
+     
+     
+    },
+    buttons: #"SYSTEM_SYSRULES_ButtonLayout"(
+      primaryButtons: {
+        #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+          label: "Approve",
+          style: "NORMAL",
+          value: "approve",
+          saveInto: ri!application.action
+        ),
+        #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+          label: "Reject",
+          style: "NORMAL",
+          value: "reject",
+          saveInto: ri!application.action
+        ),
+        #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+          label: "Edit",
+          style: "NORMAL",
+          value: "edit",
+          saveInto: ri!application.action
+        )
+      },
+      secondarybuttons: {}
+    ),
+    validations: {}
+  )
+  )
+  )
+</definition>
+        <namedTypedValue>
+            <name>application</name>
+            <type>
+                <name>EC_Application</name>
+                <namespace>urn:com:appian:types:EC_Application</namespace>
+            </type>
+        </namedTypedValue>
+        <metadataExpr></metadataExpr>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e008-511e-8000-5130-010000010000_154656"/>
+    </history>
+</contentHaul>

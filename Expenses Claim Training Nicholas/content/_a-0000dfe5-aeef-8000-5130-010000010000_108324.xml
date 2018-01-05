@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e008-511e-8000-5130-010000010000_154651</versionUuid>
+    <rule>
+        <name>expenseReportForm_Nicholas</name>
+        <uuid>_a-0000dfe5-aeef-8000-5130-010000010000_108324</uuid>
+        <description></description>
+        <parentUuid>_a-0000dfe5-aeef-8000-5130-010000010000_108323</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>#"SYSTEM_SYSRULES_formLayout_v1"(
+  label: "Submit Expense Report",
+  instructions: "",
+  contents: {
+    #"SYSTEM_SYSRULES_textField"(
+      label: "Expense Item",
+      labelPosition: "ABOVE",
+      value: ri!application.expenseItem,
+      saveInto: ri!application.expenseItem,
+      refreshAfter: "UNFOCUS",
+      required: true,
+      validations: {},
+      align: "LEFT",
+      requiredMessage: "You must enter this!"
+    ),
+    #"SYSTEM_SYSRULES_dateField"(
+      label: "Date",
+      labelPosition: "ABOVE",
+      value: ri!application.expenseDate,
+      saveInto: ri!application.expenseDate,
+      required: true,
+      requiredMessage: "You must enter this!",
+      validations: {},
+      align: "LEFT"
+    ),
+    #"SYSTEM_SYSRULES_floatingPointField"(
+      label: "Amount",
+      labelPosition: "ABOVE",
+      value: ri!application.expenseAmount,
+      saveInto: ri!application.expenseAmount,
+      refreshAfter: "UNFOCUS",
+      required: true(),
+      requiredMessage: "You must enter this!",
+      validations: {},
+      align: "LEFT"
+    ),
+    #"_a-0000dfe5-aeef-8000-5130-010000010000_108346"(
+      shownWhen: ri!application.expenseAmount &gt; 100,
+      labelPosition: "ABOVE",
+      required: true,
+      commentValue: ri!application.comment,
+      commentSaveInto: ri!application.comment,
+      requiredMessage: "You must enter this!"
+    ),
+    
+  },
+  buttons: #"SYSTEM_SYSRULES_ButtonLayout"(
+    primaryButtons: {
+      #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+        label: "Submit",
+        style: "PRIMARY",
+        value: "submit",
+        showWhen: if(
+          or(
+            ri!application.action == "reject",
+            ri!application.action == "approve"
+          ),
+          false,
+          true
+        ),
+        saveInto: {ri!application.action,a!save(target: ri!application.employeeID, value:tointeger(tostring(loggedInUser()))),a!save(target:ri!application.status, value:"Pending")
+      })
+    },
+    secondarybuttons: {
+      #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+        label: "Cancel",
+        style: "SECONDARY",
+        value: "cancel",
+        saveInto: ri!application.action,
+        showWhen: if(
+          or(
+            ri!application.action == "reject",
+            ri!application.action == "approve"
+          ),
+          false,
+          true
+        ),
+        skipvalidation: true
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>application</name>
+            <type>
+                <name>EC_Application</name>
+                <namespace>urn:com:appian:types:EC_Application</namespace>
+            </type>
+        </namedTypedValue>
+        <metadataExpr></metadataExpr>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e008-511e-8000-5130-010000010000_154651"/>
+    </history>
+</contentHaul>

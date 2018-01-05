@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e008-511e-8000-5130-010000010000_154657</versionUuid>
+    <rule>
+        <name>empoloyee_details</name>
+        <uuid>_a-0000dff4-32f5-8000-5130-010000010000_110193</uuid>
+        <description></description>
+        <parentUuid>_a-0000dfe5-aeef-8000-5130-010000010000_108323</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>= #"SYSTEM_SYSRULES_formLayout_v1"(
+  label: "Employee Form",
+  instructions: "",
+  contents: {
+    #"SYSTEM_SYSRULES_sectionLayout_v1"(
+      label: "employee",
+      contents: {
+        #"SYSTEM_SYSRULES_integerField"(
+          label: "Associate ID",
+          labelPosition: "ABOVE",
+          saveInto: ri!employee.employeeID,
+          value:ri!employee.employeeID,
+          refreshAfter: "UNFOCUS",
+          validations: {}
+        ),
+        #"SYSTEM_SYSRULES_textField"(
+          label: "First Name",
+          labelPosition: "ABOVE",
+          saveInto: ri!employee.firstName,
+          value:ri!employee.firstName,
+          refreshAfter: "UNFOCUS",
+          validations: {}
+        ),
+        #"SYSTEM_SYSRULES_textField"(
+          label: "Last Name",
+          labelPosition: "ABOVE",
+          saveInto: ri!employee.lastName,
+          value:ri!employee.lastName,
+          refreshAfter: "UNFOCUS",
+          validations: {}
+        ),
+        #"SYSTEM_SYSRULES_textField"(
+          label: "Email",
+          labelPosition: "ABOVE",
+          saveInto: ri!employee.email,
+          value:ri!employee.email,
+          refreshAfter: "UNFOCUS",
+          validations: {}
+        ),
+        #"SYSTEM_SYSRULES_textField"(
+          label: "Login User",
+          labelPosition: "ABOVE",
+          saveInto: ri!employee.login,
+          value:ri!employee.login,
+          refreshAfter: "UNFOCUS",
+          validations: {}
+        )
+      }
+    )
+  },
+  buttons: #"SYSTEM_SYSRULES_ButtonLayout"(
+    primaryButtons: {
+      #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+        label: "Submit",
+        style: "PRIMARY",
+        saveInto: {}
+      )
+    }
+  ),
+  validations: {}
+)</definition>
+        <namedTypedValue>
+            <name>employee</name>
+            <type>
+                <name>EC_Employee_Nicholas</name>
+                <namespace>urn:com:appian:types:EC_Employee_Nicholas</namespace>
+            </type>
+        </namedTypedValue>
+        <metadataExpr></metadataExpr>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e008-511e-8000-5130-010000010000_154657"/>
+    </history>
+</contentHaul>

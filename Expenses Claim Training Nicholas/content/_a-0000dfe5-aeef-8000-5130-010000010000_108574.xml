@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e008-511e-8000-5130-010000010000_154655</versionUuid>
+    <rule>
+        <name>expenseReportForm_View_Nicholas</name>
+        <uuid>_a-0000dfe5-aeef-8000-5130-010000010000_108574</uuid>
+        <description></description>
+        <parentUuid>_a-0000dfe5-aeef-8000-5130-010000010000_108323</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>load(
+local!employeeDetails: #"_a-0000dff4-32f5-8000-5130-010000010000_110780"(user: ri!application.employeeID),
+
+  /*
+  local!loggedInUser:"652152",
+local!loggedInUserInfo: rule!EC_get_Details_Nicholas().associateID,
+local!isLoggedInUserMember: contains(local!loggedInUserInfo, tostring(local!loggedInUser)),
+local!employeeDetails: rule!userInfo(user: tointeger(tostring(local!loggedInUser))),
+*/
+  
+
+#"SYSTEM_SYSRULES_formLayout_v1"(
+  label: "Expense Report",
+  instructions: "",
+  contents: {
+   /*
+    a!paragraphField(value: local!loggedInUserInfo),
+    a!paragraphField(value: local!isLoggedInUserMember),
+    a!paragraphField(value: local!employeeDetails),
+    */
+    #"SYSTEM_SYSRULES_sectionLayout_v1"(
+      label: "Initiator  Information",
+      contents: {
+        
+        #"_a-0000dffe-b805-8000-5130-010000010000_111017"(
+          firstName:local!employeeDetails.firstName,
+          lastName:local!employeeDetails.lastName,
+          email:local!employeeDetails.email,
+          id:local!employeeDetails.employeeID
+        )
+        
+      }
+    ),
+    #"SYSTEM_SYSRULES_sectionLayout_v1"(
+      label: "Report Information",
+      contents: {
+        #"SYSTEM_SYSRULES_textField"(
+          label: "Expense Item",
+          labelPosition: "ADJACENT",
+          value: ri!application.expenseItem,
+          saveInto: ri!application.expenseItem,
+          refreshAfter: "UNFOCUS",
+          required: true,
+          readOnly: true,
+          validations: {},
+          align: "LEFT"
+        ),
+        #"SYSTEM_SYSRULES_dateField"(
+          label: "Date",
+          labelPosition: "ADJACENT",
+          value: ri!application.expenseDate,
+          saveInto: ri!application.expenseDate,
+          required: true,
+          readOnly: true,
+          validations: {},
+          align: "LEFT"
+        ),
+        #"SYSTEM_SYSRULES_floatingPointField"(
+          label: "Amount",
+          labelPosition: "ADJACENT",
+          value: ri!application.expenseAmount,
+          saveInto: ri!application.expenseAmount,
+          refreshAfter: "UNFOCUS",
+          required: true(),
+          readOnly: true,
+          validations: {},
+          align: "LEFT"
+        ),
+        #"_a-0000dfe5-aeef-8000-5130-010000010000_108346"(
+          shownWhen: ri!application.expenseAmount &gt; 100,
+          labelPosition: "ADJACENT",
+          readonly: true,
+          required: true,
+          commentValue: ri!application.comment,
+          commentSaveInto: ri!application.comment
+        ),
+        #"_a-0000dfe5-aeef-8000-5130-010000010000_108346"(
+          shownWhen: true,
+          labelPosition: "ADJACENT",
+          required: true,
+          commentValue: ri!application.mComment,
+          commentSaveInto: ri!application.mComment,
+          commentLabel: "Manager's comment"
+        )
+      }
+    )
+  },
+  buttons: #"SYSTEM_SYSRULES_ButtonLayout"(
+    primaryButtons: {
+      #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+        label: if(
+          ri!application.expenseAmount &gt; 100,
+          "Supervisor Approval",
+          "Approve"
+        ),
+        style: "NORMAL",
+        value: if(
+          ri!application.expenseAmount &gt; 100,
+          "supervior",
+          "approve"
+        ),
+        saveInto: {ri!application.status,a!save(target: ri!application.action, value:"submit")}
+      ),
+      #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+        label: "Reject",
+        style: "NORMAL",
+        value: "reject",
+        saveInto: {ri!application.status,a!save(target: ri!application.action, value:"submit")}
+      ),
+      #"SYSTEM_SYSRULES_ButtonWidgetSubmit"(
+        label: "Edit",
+        style: "NORMAL",
+        value: "edit",
+        saveInto: ri!application.action
+      )
+    },
+    secondarybuttons: {}
+  ),
+  validations: {}
+))</definition>
+        <namedTypedValue>
+            <name>application</name>
+            <type>
+                <name>EC_Application</name>
+                <namespace>urn:com:appian:types:EC_Application</namespace>
+            </type>
+        </namedTypedValue>
+        <metadataExpr></metadataExpr>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e008-511e-8000-5130-010000010000_154655"/>
+    </history>
+</contentHaul>
